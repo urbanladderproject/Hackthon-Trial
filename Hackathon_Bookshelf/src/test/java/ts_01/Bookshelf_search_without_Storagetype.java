@@ -1,6 +1,7 @@
 package ts_01;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -30,8 +31,6 @@ public class Bookshelf_search_without_Storagetype extends ExtentReport {
 	public static String browsertype;
 	
 	Excelutils excel = new Excelutils();
-
-	
 	
 	@BeforeClass	
 	@Parameters({ "Browser", "Environment" })
@@ -56,11 +55,17 @@ public class Bookshelf_search_without_Storagetype extends ExtentReport {
 		
 		Url_navigating_homepage homepage = PageFactory.initElements(driver, Url_navigating_homepage.class);
 		
+		//Url_navigating_homepage homepage = new Url_navigating_homepage(driver);
+				
 		report.select(log, "Search for Bookshelf");
 		
 		log.pass(MarkupHelper.createLabel("Bookshelf is searched successfully", ExtentColor.GREEN));
 		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
 		homepage.clearpage();
+		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
 		System.out.println("Search Data");
 		

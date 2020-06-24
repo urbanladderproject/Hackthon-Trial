@@ -24,7 +24,7 @@ public class Url_navigating_homepage {
 	@FindBy(xpath = "//span[@class='search-icon icofont-search']")
 	WebElement btn_submit;
 
-	public Url_navigating_homepage(WebDriver driver) throws Exception {
+	public Url_navigating_homepage (WebDriver driver) throws Exception{
 		this.driver = driver;
 		this.input_data = Excelutils.readExcelData("search_without_storagetype");
 	}

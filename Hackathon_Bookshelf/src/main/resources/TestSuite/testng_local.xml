@@ -3,14 +3,21 @@
 <suite name="Suite">
 
 	<parameter name="Environment" value="local" />
-	<test name="Test-Chrome">
+	<test name="Bookshelf-with-storagetype">
 		<parameter name="Browser" value="chrome" />
 		<classes>
 			<class name="ts_01.Bookshelf_search_without_Storagetype" />
-			<!--<class name="ts_01.Bookshelf_search_with_storage_type" />
-			<class name="ts_01.Bookshelf_search_with_invalid_storagetype" />
-			<class name="ts_01.Bookshelf_searh_with_invalid_price" />
-			<class name="ts_01.Search_an_invalid_product" />-->
 		</classes>
 	</test>
+	<test name="Bookshelf-without-storagetype">
+		<parameter name="Browser" value="chrome" />
+		<classes>
+			<class name="ts_01.Bookshelf_search_with_storage_type" />
+		</classes>
+	</test
+			<!--<class name="ts_01.Bookshelf_search_with_invalid_storagetype" /> <class 
+		name="ts_01.Bookshelf_searh_with_invalid_price" /> <class name="ts_01.Search_an_invalid_product" 
+		/> -->
+</classes>
+</test>
 </suite>

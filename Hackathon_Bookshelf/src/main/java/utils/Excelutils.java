@@ -26,9 +26,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class Excelutils {
 
 	public static String[][] details = new String[12][9] ;
-	public static String path = System.getProperty("user.dir") + "\\Bookshelf.xls";
-	public static String Chrome_result = System.getProperty("user.dir") + "\\testresult_chrome.xls";
-	public static String Firefox_result = System.getProperty("user.dir") + "\\testresult_firefox.xls";
+	public static String path = System.getProperty("user.dir") + "\\testdata.xlsx";
+	public static String Chrome_result = System.getProperty("user.dir") + "\\testresult_chrome.xlsx";
+	public static String Firefox_result = System.getProperty("user.dir") + "\\testresult_firefox.xlsx";
 
 	
 	public static XSSFWorkbook workbook;
@@ -66,16 +66,18 @@ public class Excelutils {
 	}
 
 	public static void writeExcelData(String[][] results,String browser, int run_num) throws Exception {
+		
+		String path1 = null;
 
 		System.out.println("Into write excel Data");
 		if(browser.equalsIgnoreCase("Chrome")) {
-			path = Chrome_result;
+			path1 = Chrome_result;
 		}
 		else if(browser.equalsIgnoreCase("Firefox") || browser.equalsIgnoreCase("Mozilla")) {
-			path = Firefox_result;
+			path1 = Firefox_result;
 		}
 
-		FileInputStream files = new FileInputStream(new File(path));
+		FileInputStream files = new FileInputStream(new File(path1));
 		XSSFWorkbook wb = new XSSFWorkbook(files);
 		XSSFSheet sheet = wb.getSheet("testresult");
 		int rownum;
@@ -102,7 +104,7 @@ public class Excelutils {
 
 		}
 
-		FileOutputStream fos = new FileOutputStream(path);
+		FileOutputStream fos = new FileOutputStream(path1);
 		wb.write(fos);
 		System.out.println("Writing to excel sheet");
 		fos.close();
