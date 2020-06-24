@@ -34,7 +34,7 @@ public class Excelutils {
 	public static XSSFWorkbook workbook;
 	public static XSSFSheet sheet;
 	public static int logCounter = 0;
-	public static XSSFWorkbook reportWorkbook = new XSSFWorkbook();
+	public static XSSFWorkbook reportWorkbook;
 	public static XSSFSheet reportSheet;
 
 	public static Map<String, String> readExcelData(String sheetname) throws Exception

@@ -20,9 +20,10 @@ import pageobjects.Bookshelf;
 import pageobjects.Url_navigating_homepage;
 import setup.Environment_Setup;
 import utils.Excelutils;
+import utils.ExtentReport;
 import utils.Report;
 
-public class Bookshelf_search_without_Storagetype extends utils.ExtentReport {
+public class Bookshelf_search_without_Storagetype extends ExtentReport {
 
 	public static WebDriver driver;
 
@@ -32,7 +33,7 @@ public class Bookshelf_search_without_Storagetype extends utils.ExtentReport {
 
 	
 	
-	@BeforeClass(alwaysRun = true)
+	@BeforeClass	
 	@Parameters({ "Browser", "Environment" })
 	public void setUp(@Optional("chrome") String browser, @Optional("local") String environment) {
 		driver = Environment_Setup.getDriver(browser, environment);
@@ -40,9 +41,10 @@ public class Bookshelf_search_without_Storagetype extends utils.ExtentReport {
 	}
 	
 	
+	
 	//search for bookshelf without mentioning the storage type in the search bar
-	@Test
-	public void Bookshelf_search_without_Storagetype() throws Exception{
+	@Test	
+	public void bookshelf_search_without_Storagetype() throws Exception{
 		
 		Report report = new Report();
 		

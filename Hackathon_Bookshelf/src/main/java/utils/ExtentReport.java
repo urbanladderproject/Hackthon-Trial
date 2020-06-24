@@ -15,6 +15,8 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 public class ExtentReport {
 	public ExtentReports reports;
 	public static ExtentTest log;
+	
+	
 
 	@BeforeSuite(alwaysRun = true)
 	public void reportSetUp() {

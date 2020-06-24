@@ -1,32 +1,26 @@
 package setup;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Driver_Setup {
 
 	private ThreadLocal<WebDriver> TL_driver = new ThreadLocal<WebDriver>();
 
+
 	// Testcase execution locally
 	public WebDriver createDriver(String browser) {
 		System.out.println("Starting " + browser + " locally");
 
 		// Creating driver
-		String path = System.getProperty("user.dir");
+		//String path = System.getProperty("user.dir");
 		switch (browser) {
 		case "chrome":
 			Map<String, Object> prefs = new HashMap<String, Object>();
@@ -34,31 +28,31 @@ public class Driver_Setup {
 			ChromeOptions option = new ChromeOptions();
 			option.setExperimentalOption("prefs", prefs);
 
-			WebDriverManager.chromedriver().arch64().setup();
+			WebDriverManager.chromedriver().setup();
 			TL_driver.set(new ChromeDriver(option));
 			break;
 
 		case "firefox":
 
-			WebDriverManager.firefoxdriver().arch64().setup();
-			TL_driver.set(new FirefoxDriver());
+			WebDriverManager.firefoxdriver().setup();
+			
 			break;
 
 		case "ie":
-			WebDriverManager.iedriver().arch32().setup();
+			WebDriverManager.iedriver().setup();
 			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 			capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-			TL_driver.set(new InternetExplorerDriver());
+			
 			break;
 
 		case "edge":
-			WebDriverManager.edgedriver().arch64().setup();
-			TL_driver.set(new EdgeDriver());
+			WebDriverManager.edgedriver().setup();
+			
 			break;
 
 		case "opera":
-			WebDriverManager.operadriver().arch64().setup();
-			TL_driver.set(new OperaDriver());
+			WebDriverManager.operadriver().setup();
+			
 			break;
 		}
 
@@ -96,11 +90,7 @@ public class Driver_Setup {
 			break;
 		}
 
-		try {
-			TL_driver.set(new RemoteWebDriver(new URL(nodeURL), capabilities));
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+		
 
 		return TL_driver.get();
 	}
