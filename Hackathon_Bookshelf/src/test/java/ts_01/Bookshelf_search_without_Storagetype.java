@@ -42,7 +42,7 @@ public class Bookshelf_search_without_Storagetype extends utils.ExtentReport {
 	
 	//search for bookshelf without mentioning the storage type in the search bar
 	@Test
-	public void search_without_Storagetype() throws Exception{
+	public void Bookshelf_search_without_Storagetype() throws Exception{
 		
 		Report report = new Report();
 		
