@@ -2,6 +2,7 @@ package utils;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -16,6 +17,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -53,15 +56,16 @@ public class Excelutils {
 			value = formatter.formatCellValue(row.getCell(1));
 			hmap.put(key, value);
 		}
-		workbook.close();
 
 		System.out.println("Returning to search Page");
+		
+		file.close();
 
 		return hmap;		
 
 	}
 
-	public static void writeExcelData(String[][] results,String browser) throws Exception {
+	public static void writeExcelData(String[][] results,String browser, int run_num) throws Exception {
 
 		System.out.println("Into write excel Data");
 		if(browser.equalsIgnoreCase("Chrome")) {
@@ -72,13 +76,21 @@ public class Excelutils {
 		}
 
 		FileInputStream files = new FileInputStream(new File(path));
-		HSSFWorkbook wb = new HSSFWorkbook(files);
-		HSSFSheet sheet = wb.getSheet("testresult");
-		int rownum = 0;
+		XSSFWorkbook wb = new XSSFWorkbook(files);
+		XSSFSheet sheet = wb.getSheet("testresult");
+		int rownum;
+		
+		if(run_num==0) {
+			rownum = 0;
+		}
+		
+		else {
+			rownum=sheet.getLastRowNum() + 1;
+		}
 		//System.out.println(rownum);
-		HSSFRow row;
-		HSSFCell cell;
-		for(int i=0;i<5;i++) 
+		XSSFRow row;
+		XSSFCell cell;
+		for(int i=0;i<3;i++) 
 		{
 
 			row = sheet.createRow(rownum);
@@ -94,12 +106,10 @@ public class Excelutils {
 		wb.write(fos);
 		System.out.println("Writing to excel sheet");
 		fos.close();
-		wb.close();
 
 	}
-
-	public void reportToExcel(String message) throws IOException 
-	{
+	
+	public void reportToExcel(String message) throws IOException {
 		if (logCounter == 0)
 			reportSheet = reportWorkbook.createSheet("Logger Sheet");
 		System.out.println(logCounter + ": " + message);
@@ -108,20 +118,6 @@ public class Excelutils {
 		this.writeToFile("ExecutionReport",reportWorkbook);
 	}
 	
-	public void createSheet(String sheetName) {
-		workbook = new XSSFWorkbook();
-		sheet = workbook.createSheet(sheetName);
-	}
-
-	public void pushToSheet(List<String> data, int rowNum) throws IOException {
-		Row newRow = sheet.createRow(rowNum);
-	    for(int j = 0; j < data.size(); j++){
-	        //Fill data in row
-	        Cell cell = newRow.createCell(j);
-	        cell.setCellValue((String) data.get(j));
-	    }
-	}
-
 	public void pushToSheet(String data, int rowNum) {
 		Row row = reportSheet.createRow(rowNum);
 		Cell cell = row.createCell(0);
@@ -135,11 +131,66 @@ public class Excelutils {
 		writeFile.close();
 	}
 
-	public void updateToExcel(String fileName, List<String> data) throws IOException {
-		int num = sheet.getLastRowNum();
-		this.pushToSheet(data, num+1);
-		this.writeToFile(fileName,workbook);
+	public static void writeExcelCollectionsData(String[] info, String filename, String browser) throws Exception {
+
+		System.out.println("Into write excel Data");
+		if(browser.equalsIgnoreCase("Chrome")) {
+			path = Chrome_result;
+		}
+		else if(browser.equalsIgnoreCase("Firefox") || browser.equalsIgnoreCase("Mozilla")) {
+			path = Firefox_result;
+		}
+
+		FileInputStream files = new FileInputStream(new File(path));
+		XSSFWorkbook wb = new XSSFWorkbook(files);
+		XSSFSheet sheet = wb.getSheet("testresult");
+		int rownum = sheet.getLastRowNum();
+		
+		XSSFRow row;
+		XSSFCell cell;
+		for(int i=0;i<info.length;i++) {
+			row = sheet.createRow(rownum);
+			cell = row.createCell(0);
+			cell.setCellValue(info[i]);
+			rownum++;
+		}
+
+		FileOutputStream fos = new FileOutputStream(path);
+		wb.write(fos);
+		System.out.println("Writing to excel sheet");
+		fos.close();		
 	}
+	
+	public static void writeExcelStudyChairData(String[][] info, String filename, String browser) throws Exception {
 
+		System.out.println("Into write excel Data");
+		if(browser.equalsIgnoreCase("Chrome")) {
+			path = Chrome_result;
+		}
+		else if(browser.equalsIgnoreCase("Firefox") || browser.equalsIgnoreCase("Mozilla")) {
+			path = Firefox_result;
+		}
 
+		FileInputStream files = new FileInputStream(new File(path));
+		XSSFWorkbook wb = new XSSFWorkbook(files);
+		XSSFSheet sheet = wb.getSheet("testresult");
+		int rownum = sheet.getLastRowNum();
+		
+		XSSFRow row;
+		XSSFCell cell;
+		for(int i=0;i<info.length;i++) {
+			row = sheet.createRow(rownum);
+			cell = row.createCell(0);
+			cell.setCellValue(info[i][0]);
+			cell = row.createCell(1);
+			cell.setCellValue(info[i][1]);
+			rownum++;
+		}
+
+		FileOutputStream fos = new FileOutputStream(path);
+		wb.write(fos);
+		System.out.println("Writing to excel sheet");
+		fos.close();	
+	}	
+	
 }

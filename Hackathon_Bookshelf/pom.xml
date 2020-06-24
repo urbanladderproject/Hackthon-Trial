@@ -33,7 +33,7 @@
 				<version>3.0.0-M2</version>
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>testng.xml</suiteXmlFile>
+						<suiteXmlFile>src\main\resources\TestSuite\testng_local.xml</suiteXmlFile>
 					</suiteXmlFiles>
 				</configuration>
 			</plugin>

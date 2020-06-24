@@ -49,8 +49,16 @@ public class Url_navigating_homepage {
 		WebElement toClear = searchboxtext;
 		toClear.sendKeys(Keys.CONTROL + "a");
 		toClear.sendKeys(Keys.DELETE);
-		searchboxtext.sendKeys(searchdata);
-		System.out.println("searched");
+		
+		if(searchdata.equalsIgnoreCase("Bookshelf")  ||  searchdata.equalsIgnoreCase("Study Chair"))
+		{
+			searchboxtext.sendKeys(searchdata);
+			System.out.println("searched");
+		}
+		
+		else
+			System.out.println("You can search for either bookshelf or study chair, but you have tried to search "+ searchdata);
+			
 
 	}   
 

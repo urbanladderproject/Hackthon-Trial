@@ -22,14 +22,16 @@ import setup.Environment_Setup;
 import utils.Excelutils;
 import utils.Report;
 
-public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
-
+public class Bookshelf_searh_with_invalid_price extends utils.ExtentReport{
+	
 	public static WebDriver driver;
 
 	public static String browsertype;
 	
 	Excelutils excel = new Excelutils();
 
+	
+	
 	@BeforeClass(alwaysRun = true)
 	@Parameters({ "Browser", "Environment" })
 	public void setUp(@Optional("chrome") String browser, @Optional("local") String environment) {
@@ -38,13 +40,13 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 	}
 	
 	
-	//search for bookshelf by mentioning the storage type in the search bar
+	//search for bookshelf with an invalid given price
 	@Test
-	public void search_with_Storagetype() throws Exception{
+	public void search_for_invalid_price() throws Exception{
 		
 		Report report = new Report();
 		
-		log = reports.createTest("Test Open Bookshelf");
+		log = reports.createTest("Test Bookshelf of invalid price");
 		
 		report.startBrowser(log);
 		
@@ -52,11 +54,13 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 		
 		Url_navigating_homepage homepage = PageFactory.initElements(driver, Url_navigating_homepage.class);
 		
-		report.select(log, "Search for Open Bookshelf");
+		report.select(log, "Search for Bookshelf of invalid price");
 		
-		log.pass(MarkupHelper.createLabel("Open Bookshelf is searched successfully", ExtentColor.GREEN));
+		log.pass(MarkupHelper.createLabel("Bookshelf with invalid price wasn't searched", ExtentColor.GREEN));
 		
-		homepage.searchText("Search with storage");
+		System.out.println("Search Data");
+		
+		homepage.searchText("Search Data");
 
 		homepage.searchbutton();
 		
@@ -64,14 +68,19 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 		
 		String searched_data = bookshelf.get_searched_title();
 		
-		Assert.assertTrue(searched_data.contains("Open Bookshelf"));
+		Assert.assertTrue(searched_data.contains("Bookshelf"));
 		
 		bookshelf.stockdetails();
-				
-		bookshelf.getresult("Price",browsertype);
-		report.display(log, "Bookshelf storage type was selected");
 		
-		log.pass(MarkupHelper.createLabel("Bookshelf storage type was selected successfully", ExtentColor.GREEN));
+		bookshelf.storage_dropdown();
+		
+		bookshelf.select_storagetype("Search with Storage");
+		
+		bookshelf.getresult("Invalid Price",browsertype);
+		
+		report.display(log, "Bookshelf with invalid price wasn't listed");
+		
+		log.pass(MarkupHelper.createLabel("Bookshelf with invalid price amount wasn't listed", ExtentColor.GREEN));
 		
 		report.closeBrowser(log);
 		
@@ -83,17 +92,17 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Bookshelf didnot search for invalid storage Test: SUCCESS");
+			excel.reportToExcel("Bookshelf invalid price Test: SUCCESS");
 		else
-			excel.reportToExcel("Bookshelf search without storage type Test: FAILURE");
+			excel.reportToExcel("Bookshelf invalid price Test: FAILURE");
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Bookshelf search without storage type Test: ENDED");
-		// close the driver
+		excel.reportToExcel("Bookshelf invalid price Test: ENDED");
 
+		// close the driver
 		driver.quit();
 	}
-	
+
 }

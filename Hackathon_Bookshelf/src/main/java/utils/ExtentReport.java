@@ -13,7 +13,7 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 public class ExtentReport {
-	public static ExtentReports reports;
+	public ExtentReports reports;
 	public static ExtentTest log;
 
 	@BeforeSuite(alwaysRun = true)

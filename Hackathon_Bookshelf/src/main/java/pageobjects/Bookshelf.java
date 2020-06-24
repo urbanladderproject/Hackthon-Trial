@@ -8,9 +8,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import utils.BaseClass;
 import utils.Excelutils;
 
-public class Bookshelf extends utils.BaseClass{
+public class Bookshelf{
 	WebDriver driver;
 
 	Map<String, String> input_data;
@@ -62,7 +63,7 @@ public class Bookshelf extends utils.BaseClass{
 	public void storage_dropdown() throws Exception {
 
 		System.out.println("Into storage type");
-		doAction(driver, storage_dropdown);
+		BaseClass.doAction(driver, storage_dropdown);
 
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS); 
 
@@ -72,6 +73,8 @@ public class Bookshelf extends utils.BaseClass{
 	public void select_storagetype(String type) {
 
 		System.out.println("Select the type of storage");
+		
+		type = input_data.get(type);
 
 		if(type.equalsIgnoreCase("open"))
 			storage.click();
@@ -86,6 +89,9 @@ public class Bookshelf extends utils.BaseClass{
 
 	public void getresult(String price, String browser) throws Exception, InterruptedException
 	{
+		
+		price = input_data.get(price);
+		
 		int proprice = Integer.valueOf(price);
 
 		if(proprice == 15000)
@@ -129,20 +135,12 @@ public class Bookshelf extends utils.BaseClass{
 				//Assert.assertTrue((Integer.valueOf(productprice_web)) < 30000);   
 			}	
 
-			String filename = "testreult_" + browser +".xlsx";
+			String filename = "testresult_" + browser +".xlsx";
 			
 			//writes the results to an excel sheet respective to the browser
-			if(counter == 0)
-			{
-				Excelutils.writeExcelData(result,filename);
+			Excelutils.writeExcelData(result,filename,counter);
 				
 				counter++;
-			}
-			
-			else
-			{
-				Excelutils.updateToBookshelfExcel(filename, result, browser, counter);
-			}
 			
 
 			//waits for 30 seconds
@@ -155,5 +153,7 @@ public class Bookshelf extends utils.BaseClass{
 			System.out.println("You have tried to search for products at a maximum range of " + proprice);
 			System.out.println("But, as per your project instruction you have to search for bookshelf less than or equal to Rs.15000");
 		}
+		
+		driver.navigate().to("www.urbanladder.com");
 	}
 }

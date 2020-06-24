@@ -20,6 +20,7 @@ import pageobjects.Bookshelf;
 import pageobjects.Url_navigating_homepage;
 import setup.Environment_Setup;
 import utils.Excelutils;
+import utils.ExtentReport;
 import utils.Report;
 
 public class Bookshelf_search_with_invalid_storagetype extends utils.ExtentReport{
@@ -29,7 +30,7 @@ public class Bookshelf_search_with_invalid_storagetype extends utils.ExtentRepor
 	public static String browsertype;
 	
 	Excelutils excel = new Excelutils();
-
+	
 	
 	
 	@BeforeClass(alwaysRun = true)
@@ -40,13 +41,13 @@ public class Bookshelf_search_with_invalid_storagetype extends utils.ExtentRepor
 	}
 	
 	
-	//search for bookshelf without mentioning the storage type in the search bar
+	//search for bookshelf of invalid storage type
 	@Test
-	public void search_without_Storagetype() throws Exception{
+	public void search_invalid_Storagetype() throws Exception{
 		
 		Report report = new Report();
 		
-		log = reports.createTest("Test Bookshelf");
+		log = reports.createTest("Test Invalid storage type Bookshelf");
 		
 		report.startBrowser(log);
 		
@@ -57,8 +58,6 @@ public class Bookshelf_search_with_invalid_storagetype extends utils.ExtentRepor
 		report.select(log, "Search for Bookshelf");
 		
 		log.pass(MarkupHelper.createLabel("Bookshelf is searched successfully", ExtentColor.GREEN));
-		
-		homepage.clearpage();
 		
 		System.out.println("Search Data");
 		
@@ -78,11 +77,11 @@ public class Bookshelf_search_with_invalid_storagetype extends utils.ExtentRepor
 		
 		bookshelf.select_storagetype("Invalid Storage");
 		
-		bookshelf.getresult("Price",browsertype);
+//		bookshelf.getresult("Price",browsertype);
 		
 		report.display(log, "Bookshelf storage type was selected");
 		
-		log.pass(MarkupHelper.createLabel("Bookshelf storage type was selected successfully", ExtentColor.GREEN));
+		log.pass(MarkupHelper.createLabel("Bookshelf of invalid storage type wasn't selected successfully", ExtentColor.GREEN));
 		
 		report.closeBrowser(log);
 		
@@ -96,12 +95,12 @@ public class Bookshelf_search_with_invalid_storagetype extends utils.ExtentRepor
 		if (result.isSuccess())
 			excel.reportToExcel("Bookshelf didnot search for invalid storage Test: SUCCESS");
 		else
-			excel.reportToExcel("Bookshelf search without storage type Test: FAILURE");
+			excel.reportToExcel("Bookshelf didnot search for invalid storage type Test: FAILURE");
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Bookshelf search without storage type Test: ENDED");
+		excel.reportToExcel("Bookshelf didnot search for invalid storage type Test: ENDED");
 		// close the driver
 
 		driver.quit();

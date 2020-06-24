@@ -1,10 +1,9 @@
-package ts_01;
+package ts_04;
 
 import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -16,13 +15,13 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
-import pageobjects.Bookshelf;
+import pageobjects.StudyChair;
 import pageobjects.Url_navigating_homepage;
 import setup.Environment_Setup;
 import utils.Excelutils;
 import utils.Report;
 
-public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
+public class Studychair_with_invalid_sortby extends utils.ExtentReport {
 
 	public static WebDriver driver;
 
@@ -30,6 +29,8 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 	
 	Excelutils excel = new Excelutils();
 
+	
+	
 	@BeforeClass(alwaysRun = true)
 	@Parameters({ "Browser", "Environment" })
 	public void setUp(@Optional("chrome") String browser, @Optional("local") String environment) {
@@ -38,13 +39,13 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 	}
 	
 	
-	//search for bookshelf by mentioning the storage type in the search bar
+	//search for study chair with other sort by options
 	@Test
-	public void search_with_Storagetype() throws Exception{
+	public void invalid_sortby() throws Exception{
 		
 		Report report = new Report();
 		
-		log = reports.createTest("Test Open Bookshelf");
+		log = reports.createTest("Study chair with invalid sort by options");
 		
 		report.startBrowser(log);
 		
@@ -52,26 +53,21 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 		
 		Url_navigating_homepage homepage = PageFactory.initElements(driver, Url_navigating_homepage.class);
 		
-		report.select(log, "Search for Open Bookshelf");
+		report.select(log, "Study chair with invalid sort by");
 		
-		log.pass(MarkupHelper.createLabel("Open Bookshelf is searched successfully", ExtentColor.GREEN));
+		log.pass(MarkupHelper.createLabel("Study chair with invalid sort by wasn't searched", ExtentColor.GREEN));
 		
-		homepage.searchText("Search with storage");
+		homepage.searchText("Search for study chair");
 
 		homepage.searchbutton();
 		
-		Bookshelf bookshelf = PageFactory.initElements(driver, Bookshelf.class);
+		StudyChair sc = PageFactory.initElements(driver, StudyChair.class);
+
+		sc.getresult(browsertype, "Invalid Sort By");
 		
-		String searched_data = bookshelf.get_searched_title();
+		report.display(log, "Study chair with invalid sort by wasn't searched");
 		
-		Assert.assertTrue(searched_data.contains("Open Bookshelf"));
-		
-		bookshelf.stockdetails();
-				
-		bookshelf.getresult("Price",browsertype);
-		report.display(log, "Bookshelf storage type was selected");
-		
-		log.pass(MarkupHelper.createLabel("Bookshelf storage type was selected successfully", ExtentColor.GREEN));
+		log.pass(MarkupHelper.createLabel("Study chair with invalid sort by wasn't searched", ExtentColor.GREEN));
 		
 		report.closeBrowser(log);
 		
@@ -83,17 +79,19 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Bookshelf didnot search for invalid storage Test: SUCCESS");
+			excel.reportToExcel("Study chair with invalid sort by Test: SUCCESS");
 		else
-			excel.reportToExcel("Bookshelf search without storage type Test: FAILURE");
+			excel.reportToExcel("Study chair with invalid sort by Test: FAILURE");
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Bookshelf search without storage type Test: ENDED");
+		excel.reportToExcel("Study chair with invalid sort by Test: ENDED");
 		// close the driver
 
 		driver.quit();
 	}
-	
+
+
+
 }

@@ -1,4 +1,4 @@
-package ts_01;
+package ts_03;
 
 import java.io.IOException;
 
@@ -16,18 +16,17 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
-import pageobjects.Bookshelf;
-import pageobjects.Url_navigating_homepage;
+import pageobjects.GiftCard;
 import setup.Environment_Setup;
 import utils.Excelutils;
 import utils.Report;
 
-public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
+public class Giftcard_with_empty_recepient_name extends utils.ExtentReport {
 
 	public static WebDriver driver;
 
 	public static String browsertype;
-	
+
 	Excelutils excel = new Excelutils();
 
 	@BeforeClass(alwaysRun = true)
@@ -36,64 +35,76 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 		driver = Environment_Setup.getDriver(browser, environment);
 		browsertype = browser;
 	}
-	
-	
-	//search for bookshelf by mentioning the storage type in the search bar
+
+	//Tries to fill an empty value in the recepient name field of the form
 	@Test
-	public void search_with_Storagetype() throws Exception{
+	public void empty_receipent_name() throws Exception {
 		
 		Report report = new Report();
-		
-		log = reports.createTest("Test Open Bookshelf");
-		
-		report.startBrowser(log);
-		
-		log.pass(MarkupHelper.createLabel("Browser started successfully", ExtentColor.GREEN));
-		
-		Url_navigating_homepage homepage = PageFactory.initElements(driver, Url_navigating_homepage.class);
-		
-		report.select(log, "Search for Open Bookshelf");
-		
-		log.pass(MarkupHelper.createLabel("Open Bookshelf is searched successfully", ExtentColor.GREEN));
-		
-		homepage.searchText("Search with storage");
 
-		homepage.searchbutton();
+		log = reports.createTest("Test empty recepient name");
+
+		report.startBrowser(log);
+
+		log.pass(MarkupHelper.createLabel("Browser started successfully", ExtentColor.GREEN));
+
+		GiftCard gc  = PageFactory.initElements(driver, GiftCard.class);
+
+		report.select(log, "Empty recepient name");
+
+		log.pass(MarkupHelper.createLabel("Empty recepient name wasn't accepted", ExtentColor.GREEN));
+
+		gc.enter_to_giftcard("Order type");
+
+		gc.select_gifttype("Occasion");
+
+		gc.enter_amount("Gift Card amount");
+
+		gc.next_page();
+
+		gc.recepient_name("Empty Recepient Name");
 		
-		Bookshelf bookshelf = PageFactory.initElements(driver, Bookshelf.class);
+		gc.recepient_email("Recepient Email");
+
+		gc.sender_name("Sender Name");
+
+		gc.sender_email("Sender Email");
+
+		gc.sender_phone("Sender Phonenumber");
+
+		gc.confirm();
 		
-		String searched_data = bookshelf.get_searched_title();
+		String warning = gc.Alerts();
 		
-		Assert.assertTrue(searched_data.contains("Open Bookshelf"));
-		
-		bookshelf.stockdetails();
-				
-		bookshelf.getresult("Price",browsertype);
-		report.display(log, "Bookshelf storage type was selected");
-		
-		log.pass(MarkupHelper.createLabel("Bookshelf storage type was selected successfully", ExtentColor.GREEN));
-		
+		Assert.assertTrue(warning.contains("fill out this field"));
+
+		report.display(log, "Empty recepient name wasn't accepted");
+
+		log.pass(MarkupHelper.createLabel("Empty recepient name wasn't accepted", ExtentColor.GREEN));
+
 		report.closeBrowser(log);
-		
+
 		log.pass(MarkupHelper.createLabel("Browser closed successfully", ExtentColor.GREEN));
 
+
 	}
-	
+
 	@AfterMethod(alwaysRun = true)
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Bookshelf didnot search for invalid storage Test: SUCCESS");
+			excel.reportToExcel("Empty recepient name accepting Test: SUCCESS");
 		else
-			excel.reportToExcel("Bookshelf search without storage type Test: FAILURE");
+			excel.reportToExcel("Empty recepient name accepting Test: FAILURE");
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Bookshelf search without storage type Test: ENDED");
+		excel.reportToExcel("Empty recepient name accepting Test: ENDED");
 		// close the driver
 
 		driver.quit();
 	}
-	
+
+
 }

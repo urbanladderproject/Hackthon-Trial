@@ -56,7 +56,7 @@ public class BaseClass {
 	}
 
 	// for doing mouse hover using action class
-	public void doAction(WebDriver driver, WebElement element) {
+	public static void doAction(WebDriver driver, WebElement element) {
 		Actions action = new Actions(driver);
 		action.moveToElement(element).build().perform();
 	}

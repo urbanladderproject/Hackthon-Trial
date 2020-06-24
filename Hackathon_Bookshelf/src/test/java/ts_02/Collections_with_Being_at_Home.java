@@ -1,10 +1,9 @@
-package ts_01;
+package ts_02;
 
 import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -16,13 +15,12 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
-import pageobjects.Bookshelf;
-import pageobjects.Url_navigating_homepage;
+import pageobjects.Display_Collections;
 import setup.Environment_Setup;
 import utils.Excelutils;
 import utils.Report;
 
-public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
+public class Collections_with_Being_at_Home extends utils.ExtentReport {
 
 	public static WebDriver driver;
 
@@ -37,41 +35,34 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 		browsertype = browser;
 	}
 	
-	
-	//search for bookshelf by mentioning the storage type in the search bar
 	@Test
-	public void search_with_Storagetype() throws Exception{
+	public void valid_main_and_submenu () throws Exception{
 		
 		Report report = new Report();
 		
-		log = reports.createTest("Test Open Bookshelf");
+		log = reports.createTest("Test Collections with valid sub menu");
 		
 		report.startBrowser(log);
 		
 		log.pass(MarkupHelper.createLabel("Browser started successfully", ExtentColor.GREEN));
 		
-		Url_navigating_homepage homepage = PageFactory.initElements(driver, Url_navigating_homepage.class);
+		Display_Collections collections = PageFactory.initElements(driver, Display_Collections.class);
 		
-		report.select(log, "Search for Open Bookshelf");
+		report.select(log, "List the categories in the submenu - 'Being at Home'");
 		
-		log.pass(MarkupHelper.createLabel("Open Bookshelf is searched successfully", ExtentColor.GREEN));
+		log.pass(MarkupHelper.createLabel("The submenu 'Being at Home' is displayed successfully", ExtentColor.GREEN));
 		
-		homepage.searchText("Search with storage");
+		collections.collection_click("Menu to be selected");
+		
+		collections.getdata("Sub-menu to be selected");
+		
+		collections.displaydata();
+		
+		collections.write_result(browsertype);
 
-		homepage.searchbutton();
+		report.display(log, "The submenu 'Being at Home' is displayed successfully");
 		
-		Bookshelf bookshelf = PageFactory.initElements(driver, Bookshelf.class);
-		
-		String searched_data = bookshelf.get_searched_title();
-		
-		Assert.assertTrue(searched_data.contains("Open Bookshelf"));
-		
-		bookshelf.stockdetails();
-				
-		bookshelf.getresult("Price",browsertype);
-		report.display(log, "Bookshelf storage type was selected");
-		
-		log.pass(MarkupHelper.createLabel("Bookshelf storage type was selected successfully", ExtentColor.GREEN));
+		log.pass(MarkupHelper.createLabel("The submenu 'Being at Home' is displayed successfully", ExtentColor.GREEN));
 		
 		report.closeBrowser(log);
 		
@@ -83,17 +74,19 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Bookshelf didnot search for invalid storage Test: SUCCESS");
+			excel.reportToExcel("The submenu 'Being at Home' displaying Test: SUCCESS");
 		else
-			excel.reportToExcel("Bookshelf search without storage type Test: FAILURE");
+			excel.reportToExcel("The submenu 'Being at Home' displaying Test: FAILURE");
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Bookshelf search without storage type Test: ENDED");
+		excel.reportToExcel("List the categories in the submenu 'Being at Home' Test: ENDED");
 		// close the driver
 
 		driver.quit();
 	}
-	
+
+
+
 }

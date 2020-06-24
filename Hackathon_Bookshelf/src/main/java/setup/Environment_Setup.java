@@ -26,13 +26,17 @@ public class Environment_Setup extends BaseClass {
 
 		// Assigning environment for the testcases to run
 		if (environment.equalsIgnoreCase("grid")) {
+			System.out.println(environment);
 			driver = setup.createDriverGrid(browser);
 		}
 
 		else if (environment.equalsIgnoreCase("local")) {
+			System.out.println(environment);
 			driver = setup.createDriver(browser);
 		}
 
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
 		// Maximizing the Browser Window
 		driver.manage().window().maximize();
 
