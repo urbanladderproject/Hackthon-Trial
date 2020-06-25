@@ -20,7 +20,9 @@ import pageobjects.Bookshelf;
 import pageobjects.Url_navigating_homepage;
 import setup.Environment_Setup;
 import utils.Excelutils;
+import utils.ExtentReport;
 import utils.Report;
+import utils.Screenshots;
 
 public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 
@@ -44,7 +46,7 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 		
 		Report report = new Report();
 		
-		log = reports.createTest("Test Open Bookshelf");
+		ExtentReport.log = ExtentReport.reports.createTest("Test Open Bookshelf");
 		
 		report.startBrowser(log);
 		
@@ -55,6 +57,8 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 		report.select(log, "Search for Open Bookshelf");
 		
 		log.pass(MarkupHelper.createLabel("Open Bookshelf is searched successfully", ExtentColor.GREEN));
+		
+		Url_navigating_homepage.clearpage();
 		
 		homepage.searchText("Search with storage");
 
@@ -69,6 +73,9 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 		bookshelf.stockdetails();
 				
 		bookshelf.getresult("Price",browsertype);
+		
+		Screenshots.takesnap(driver, "Search with given storage type",browsertype);
+		
 		report.display(log, "Bookshelf storage type was selected");
 		
 		log.pass(MarkupHelper.createLabel("Bookshelf storage type was selected successfully", ExtentColor.GREEN));
@@ -83,14 +90,14 @@ public class Bookshelf_search_with_storage_type extends utils.ExtentReport {
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Bookshelf didnot search for invalid storage Test: SUCCESS");
+			excel.reportToExcel("Bookshelf didnot search for invalid storage Test: SUCCESS",browsertype);
 		else
-			excel.reportToExcel("Bookshelf search without storage type Test: FAILURE");
+			excel.reportToExcel("Bookshelf search without storage type Test: FAILURE",browsertype);
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Bookshelf search without storage type Test: ENDED");
+		excel.reportToExcel("Bookshelf search without storage type Test: ENDED",browsertype);
 		// close the driver
 
 		driver.quit();

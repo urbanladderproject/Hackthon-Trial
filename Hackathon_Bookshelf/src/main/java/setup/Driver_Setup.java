@@ -6,7 +6,9 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -35,6 +37,7 @@ public class Driver_Setup {
 		case "firefox":
 
 			WebDriverManager.firefoxdriver().setup();
+			TL_driver.set(new FirefoxDriver());
 			
 			break;
 
@@ -42,17 +45,12 @@ public class Driver_Setup {
 			WebDriverManager.iedriver().setup();
 			DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 			capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-			
-			break;
-
-		case "edge":
-			WebDriverManager.edgedriver().setup();
-			
+			TL_driver.set(new InternetExplorerDriver());
 			break;
 
 		case "opera":
 			WebDriverManager.operadriver().setup();
-			
+			TL_driver.set(new OperaDriver());
 			break;
 		}
 

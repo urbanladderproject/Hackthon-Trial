@@ -19,6 +19,7 @@ import pageobjects.GiftCard;
 import setup.Environment_Setup;
 import utils.Excelutils;
 import utils.Report;
+import utils.Screenshots;
 
 public class Giftcard_with_invalid_occasion extends utils.ExtentReport {
 
@@ -57,6 +58,8 @@ public class Giftcard_with_invalid_occasion extends utils.ExtentReport {
 
 		gc.select_gifttype("Invalid Occasion");
 		
+		Screenshots.takesnap(driver, "Invalid Occasion",browsertype);
+		
 		report.display(log, "Selecting an invalid occasion wasn't successfully");
 
 		log.pass(MarkupHelper.createLabel("Selecting an invalid occasion wasn't successfully", ExtentColor.GREEN));
@@ -72,14 +75,14 @@ public class Giftcard_with_invalid_occasion extends utils.ExtentReport {
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Selecting an invalid occasion Test: SUCCESS");
+			excel.reportToExcel("Selecting an invalid occasion Test: SUCCESS",browsertype);
 		else
-			excel.reportToExcel("Selecting an invalid occasion Test: FAILURE");
+			excel.reportToExcel("Selecting an invalid occasion Test: FAILURE",browsertype);
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Selecting an invalid occasion Test: ENDED");
+		excel.reportToExcel("Selecting an invalid occasion Test: ENDED",browsertype);
 		// close the driver
 
 		driver.quit();

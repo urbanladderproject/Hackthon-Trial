@@ -20,7 +20,9 @@ import pageobjects.Bookshelf;
 import pageobjects.Url_navigating_homepage;
 import setup.Environment_Setup;
 import utils.Excelutils;
+import utils.ExtentReport;
 import utils.Report;
+import utils.Screenshots;
 
 public class Bookshelf_searh_with_invalid_price extends utils.ExtentReport{
 	
@@ -46,7 +48,7 @@ public class Bookshelf_searh_with_invalid_price extends utils.ExtentReport{
 		
 		Report report = new Report();
 		
-		log = reports.createTest("Test Bookshelf of invalid price");
+		ExtentReport.log = ExtentReport.reports.createTest("Test Bookshelf of invalid price");
 		
 		report.startBrowser(log);
 		
@@ -78,6 +80,8 @@ public class Bookshelf_searh_with_invalid_price extends utils.ExtentReport{
 		
 		bookshelf.getresult("Invalid Price",browsertype);
 		
+		Screenshots.takesnap(driver, "Invalid Price",browsertype);
+		
 		report.display(log, "Bookshelf with invalid price wasn't listed");
 		
 		log.pass(MarkupHelper.createLabel("Bookshelf with invalid price amount wasn't listed", ExtentColor.GREEN));
@@ -92,14 +96,14 @@ public class Bookshelf_searh_with_invalid_price extends utils.ExtentReport{
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Bookshelf invalid price Test: SUCCESS");
+			excel.reportToExcel("Bookshelf invalid price Test: SUCCESS",browsertype);
 		else
-			excel.reportToExcel("Bookshelf invalid price Test: FAILURE");
+			excel.reportToExcel("Bookshelf invalid price Test: FAILURE",browsertype);
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Bookshelf invalid price Test: ENDED");
+		excel.reportToExcel("Bookshelf invalid price Test: ENDED",browsertype);
 
 		// close the driver
 		driver.quit();

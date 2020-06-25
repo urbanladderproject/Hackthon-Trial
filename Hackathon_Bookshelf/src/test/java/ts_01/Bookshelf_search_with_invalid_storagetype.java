@@ -22,6 +22,7 @@ import setup.Environment_Setup;
 import utils.Excelutils;
 import utils.ExtentReport;
 import utils.Report;
+import utils.Screenshots;
 
 public class Bookshelf_search_with_invalid_storagetype extends utils.ExtentReport{
 	
@@ -47,7 +48,7 @@ public class Bookshelf_search_with_invalid_storagetype extends utils.ExtentRepor
 		
 		Report report = new Report();
 		
-		log = reports.createTest("Test Invalid storage type Bookshelf");
+		ExtentReport.log = ExtentReport.reports.createTest("Test Invalid storage type Bookshelf");
 		
 		report.startBrowser(log);
 		
@@ -77,7 +78,7 @@ public class Bookshelf_search_with_invalid_storagetype extends utils.ExtentRepor
 		
 		bookshelf.select_storagetype("Invalid Storage");
 		
-//		bookshelf.getresult("Price",browsertype);
+		Screenshots.takesnap(driver, "Invalid Storage type",browsertype);
 		
 		report.display(log, "Bookshelf storage type was selected");
 		
@@ -93,14 +94,14 @@ public class Bookshelf_search_with_invalid_storagetype extends utils.ExtentRepor
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Bookshelf didnot search for invalid storage Test: SUCCESS");
+			excel.reportToExcel("Bookshelf didnot search for invalid storage Test: SUCCESS",browsertype);
 		else
-			excel.reportToExcel("Bookshelf didnot search for invalid storage type Test: FAILURE");
+			excel.reportToExcel("Bookshelf didnot search for invalid storage type Test: FAILURE",browsertype);
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Bookshelf didnot search for invalid storage type Test: ENDED");
+		excel.reportToExcel("Bookshelf didnot search for invalid storage type Test: ENDED",browsertype);
 		// close the driver
 
 		driver.quit();

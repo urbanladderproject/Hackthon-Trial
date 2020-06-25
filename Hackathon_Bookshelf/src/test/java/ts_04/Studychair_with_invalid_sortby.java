@@ -57,6 +57,8 @@ public class Studychair_with_invalid_sortby extends utils.ExtentReport {
 		
 		log.pass(MarkupHelper.createLabel("Study chair with invalid sort by wasn't searched", ExtentColor.GREEN));
 		
+		Url_navigating_homepage.clearpage();
+		
 		homepage.searchText("Search for study chair");
 
 		homepage.searchbutton();
@@ -79,14 +81,14 @@ public class Studychair_with_invalid_sortby extends utils.ExtentReport {
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Study chair with invalid sort by Test: SUCCESS");
+			excel.reportToExcel("Study chair with invalid sort by Test: SUCCESS",browsertype);
 		else
-			excel.reportToExcel("Study chair with invalid sort by Test: FAILURE");
+			excel.reportToExcel("Study chair with invalid sort by Test: FAILURE",browsertype);
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Study chair with invalid sort by Test: ENDED");
+		excel.reportToExcel("Study chair with invalid sort by Test: ENDED",browsertype);
 		// close the driver
 
 		driver.quit();

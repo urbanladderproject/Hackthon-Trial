@@ -70,10 +70,6 @@ public class StudyChair {
 			//writes the results to an excel sheet respective to the browser
 			Excelutils.writeExcelStudyChairData(result,filename,browser);			
 
-			//waits for 30 seconds
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
-			driver.navigate().to("www.urbanladder.com");
 		}
 		else
 			System.out.println("You have to sort the result by highly recommended order, but you have tried to sort by " + sortby);

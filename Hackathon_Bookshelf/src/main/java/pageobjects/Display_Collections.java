@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import utils.BaseClass;
 import utils.Excelutils;
 
 
@@ -35,8 +36,11 @@ public class Display_Collections {
 
 		value = input_data.get(value);
 		
+		System.out.println(value);
+		
 		if(value.equalsIgnoreCase("Collections"))
-			click_collections.click();
+			BaseClass.doAction(driver, click_collections);
+			//click_collections.click();
 		else
 			System.out.println("You have to select Collections menu but you have tried to select " + value);
 
@@ -47,12 +51,18 @@ public class Display_Collections {
 
 		submenu = input_data.get(submenu);
 		
-		String Data;
+		System.out.println(submenu);
+		
 		if(submenu.equalsIgnoreCase("Being at home"))
 		{
-			Data = list_data.getText();
-			info = Data.split("\\r?\\n");
+			System.out.println("Into get data");
+			String Data = list_data.getText();
 			
+			System.out.println(Data);
+			
+			info = Data.split("\\r?\\n");	
+			
+			System.out.println(info);
 		}
 
 		else
@@ -72,16 +82,11 @@ public class Display_Collections {
 	}
 
 	public void write_result(String browser) throws Exception {
-		String filename = "testresult_" + browser +".xlsx";
+		
 
 		//writes the results to an excel sheet respective to the browser
-		Excelutils.writeExcelCollectionsData(info,filename,browser);
+		Excelutils.writeExcelCollectionsData(info,browser);
 
-
-		//waits for 30 seconds
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		
-		driver.navigate().to("www.urbanladder.com");
 	}
 
 }

@@ -18,11 +18,11 @@ public class Screenshots {
 		this.driver = driver;
 	}
 
-	public void takesnap(WebDriver driver, String pathimg) throws IOException {
+	public static void takesnap(WebDriver driver, String pathimg,String browser) throws IOException {
 		String path = System.getProperty("user.dir");
 		TakesScreenshot shot = ((TakesScreenshot) driver);
 		File src = shot.getScreenshotAs(OutputType.FILE);
-		File dest = new File(path + "//src//screenshot//" + pathimg + ".jpg");
+		File dest = new File(path + "//src//screenshot//" + browser +"//" + pathimg + ".jpg");
 		FileUtils.copyFile(src, dest);
 	}
 }

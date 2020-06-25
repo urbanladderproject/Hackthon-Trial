@@ -54,7 +54,7 @@ public class GiftCard {
 
 		order = input_data.get(order);
 		
-		if(order.equalsIgnoreCase("Gift Card"))
+		if(order.equalsIgnoreCase("Gift Card")||order.equalsIgnoreCase("Gift Cards"))
 			select_giftcard.click();
 
 		else
@@ -125,19 +125,21 @@ public class GiftCard {
 
 	public void confirm() {
 		btn_cnfrm.click();
-
+		System.out.println("Confirmed");
 	}
 
 	public String Alerts() {
 		
+		System.out.println("Alerts");
+		
 		Alert alert = driver.switchTo().alert();
 
 		String warning = alert.getText();
+		
+		System.out.println(warning);
+		
+		alert.accept();
 
 		return warning;
-	}
-
-	public void back_to_homepage() {
-		driver.navigate().to("www.urbanladder.com");
 	}
 }

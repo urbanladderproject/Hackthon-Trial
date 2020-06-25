@@ -16,6 +16,7 @@ public class Url_navigating_homepage {
 	Map<String, String> input_data;
 
 	@FindBy(partialLinkText = "Close")
+	static
 	WebElement clearpage;
 
 	@FindBy(id = "search")
@@ -26,11 +27,11 @@ public class Url_navigating_homepage {
 
 	public Url_navigating_homepage (WebDriver driver) throws Exception{
 		this.driver = driver;
-		this.input_data = Excelutils.readExcelData("search_without_storagetype");
+		this.input_data = Excelutils.readExcelData("test_input_data");
 	}
 
 	//closes the login popup 
-	public void clearpage() {
+	public static void clearpage() {
 
 		try{
 			clearpage.click();
@@ -50,7 +51,7 @@ public class Url_navigating_homepage {
 		toClear.sendKeys(Keys.CONTROL + "a");
 		toClear.sendKeys(Keys.DELETE);
 		
-		if(searchdata.equalsIgnoreCase("Bookshelf")  ||  searchdata.equalsIgnoreCase("Study Chair"))
+		if(searchdata.equalsIgnoreCase("Bookshelf") || searchdata.equalsIgnoreCase("Open Bookshelf")  ||  searchdata.equalsIgnoreCase("Study Chair"))
 		{
 			searchboxtext.sendKeys(searchdata);
 			System.out.println("searched");

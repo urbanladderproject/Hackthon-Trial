@@ -88,14 +88,14 @@ public class Giftcard_with_valid_data extends utils.ExtentReport {
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Gift Card valid form filling Test: SUCCESS");
+			excel.reportToExcel("Gift Card valid form filling Test: SUCCESS",browsertype);
 		else
-			excel.reportToExcel("Gift Card valid form filling Test: FAILURE");
+			excel.reportToExcel("Gift Card valid form filling Test: FAILURE",browsertype);
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Gift Card valid form filling Test: ENDED");
+		excel.reportToExcel("Gift Card valid form filling Test: ENDED",browsertype);
 		// close the driver
 
 		driver.quit();

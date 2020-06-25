@@ -19,6 +19,7 @@ import pageobjects.GiftCard;
 import setup.Environment_Setup;
 import utils.Excelutils;
 import utils.Report;
+import utils.Screenshots;
 
 public class Giftcard_with_invalid_order_type extends utils.ExtentReport {
 
@@ -55,6 +56,8 @@ public class Giftcard_with_invalid_order_type extends utils.ExtentReport {
 		log.pass(MarkupHelper.createLabel("An invalid order type wan't selected", ExtentColor.GREEN));
 
 		gc.enter_to_giftcard("Invalid Order type");
+		
+		Screenshots.takesnap(driver, "invalid order type",browsertype);
 
 		report.display(log, "Testing to select an invalid order type");
 
@@ -71,14 +74,14 @@ public class Giftcard_with_invalid_order_type extends utils.ExtentReport {
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Select an invalid order type Test: SUCCESS");
+			excel.reportToExcel("Select an invalid order type Test: SUCCESS",browsertype);
 		else
-			excel.reportToExcel("Select an invalid order type Test: FAILURE");
+			excel.reportToExcel("Select an invalid order type Test: FAILURE",browsertype);
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Select an invalid order type Test: ENDED");
+		excel.reportToExcel("Select an invalid order type Test: ENDED",browsertype);
 		// close the driver
 
 		driver.quit();

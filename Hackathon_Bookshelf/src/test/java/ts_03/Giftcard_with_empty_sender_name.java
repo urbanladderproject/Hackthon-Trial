@@ -1,6 +1,7 @@
 package ts_03;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -17,9 +18,11 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 import pageobjects.GiftCard;
+import pageobjects.Url_navigating_homepage;
 import setup.Environment_Setup;
 import utils.Excelutils;
 import utils.Report;
+import utils.Screenshots;
 
 public class Giftcard_with_empty_sender_name extends utils.ExtentReport {
 
@@ -48,6 +51,12 @@ public class Giftcard_with_empty_sender_name extends utils.ExtentReport {
 
 		log.pass(MarkupHelper.createLabel("Browser started successfully", ExtentColor.GREEN));
 
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+		Url_navigating_homepage.clearpage();
+		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		
 		GiftCard gc  = PageFactory.initElements(driver, GiftCard.class);
 
 		report.select(log, "Empty sender name");
@@ -74,9 +83,9 @@ public class Giftcard_with_empty_sender_name extends utils.ExtentReport {
 
 		gc.confirm();
 		
-		String warning = gc.Alerts();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
-		Assert.assertTrue(warning.contains("fill out this field"));
+		Screenshots.takesnap(driver, "Empty sender name",browsertype);
 
 		report.display(log, "Empty sender name wasn't accepted");
 
@@ -93,14 +102,14 @@ public class Giftcard_with_empty_sender_name extends utils.ExtentReport {
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Empty sender name accepting Test: SUCCESS");
+			excel.reportToExcel("Empty sender name accepting Test: SUCCESS",browsertype);
 		else
-			excel.reportToExcel("Empty sender name accepting Test: FAILURE");
+			excel.reportToExcel("Empty sender name accepting Test: FAILURE",browsertype);
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Empty sender name accepting Test: ENDED");
+		excel.reportToExcel("Empty sender name accepting Test: ENDED",browsertype);
 		// close the driver
 
 		driver.quit();

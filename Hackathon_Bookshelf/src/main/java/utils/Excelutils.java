@@ -29,6 +29,9 @@ public class Excelutils {
 	public static String path = System.getProperty("user.dir") + "\\testdata.xlsx";
 	public static String Chrome_result = System.getProperty("user.dir") + "\\testresult_chrome.xlsx";
 	public static String Firefox_result = System.getProperty("user.dir") + "\\testresult_firefox.xlsx";
+	
+	public static String Chrome_report = System.getProperty("user.dir") + "\\testreport_chrome.xlsx";
+	public static String Firefox_report = System.getProperty("user.dir") + "\\testreport_firefox.xlsx";
 
 	
 	public static XSSFWorkbook workbook;
@@ -37,12 +40,14 @@ public class Excelutils {
 	public static XSSFWorkbook reportWorkbook;
 	public static XSSFSheet reportSheet;
 
+	public static int run_num = 0;
 	public static Map<String, String> readExcelData(String sheetname) throws Exception
 	{
 		System.out.println("Entered into excel utils");
 
 		FileInputStream file = new FileInputStream(path);
 		System.out.println("Selected the file " + file);
+		
 		workbook = new XSSFWorkbook(file);
 		sheet = workbook.getSheet(sheetname);
 
@@ -65,7 +70,7 @@ public class Excelutils {
 
 	}
 
-	public static void writeExcelData(String[][] results,String browser, int run_num) throws Exception {
+	public static void writeExcelData(String[][] results,String browser) throws Exception {
 		
 		String path1 = null;
 
@@ -84,6 +89,7 @@ public class Excelutils {
 		
 		if(run_num==0) {
 			rownum = 0;
+			run_num++;
 		}
 		
 		else {
@@ -108,10 +114,24 @@ public class Excelutils {
 		wb.write(fos);
 		System.out.println("Writing to excel sheet");
 		fos.close();
+		wb.close();
 
 	}
 	
-	public void reportToExcel(String message) throws IOException {
+	public void reportToExcel(String message,String browser) throws IOException {
+		String path1 = null;
+
+		System.out.println("Into write excel Data");
+		if(browser.equalsIgnoreCase("Chrome")) {
+			path1 = Chrome_report;
+		}
+		else if(browser.equalsIgnoreCase("Firefox") || browser.equalsIgnoreCase("Mozilla")) {
+			path1 = Firefox_report;
+		}
+
+		FileInputStream files = new FileInputStream(new File(path1));
+		reportWorkbook = new XSSFWorkbook(files);
+
 		if (logCounter == 0)
 			reportSheet = reportWorkbook.createSheet("Logger Sheet");
 		System.out.println(logCounter + ": " + message);
@@ -133,20 +153,21 @@ public class Excelutils {
 		writeFile.close();
 	}
 
-	public static void writeExcelCollectionsData(String[] info, String filename, String browser) throws Exception {
+	public static void writeExcelCollectionsData(String[] info, String browser) throws Exception {
 
-		System.out.println("Into write excel Data");
+		String path2=null;
+		System.out.println("Into write collection excel Data");
 		if(browser.equalsIgnoreCase("Chrome")) {
-			path = Chrome_result;
+			path2 = Chrome_result;
 		}
 		else if(browser.equalsIgnoreCase("Firefox") || browser.equalsIgnoreCase("Mozilla")) {
-			path = Firefox_result;
+			path2 = Firefox_result;
 		}
 
-		FileInputStream files = new FileInputStream(new File(path));
+		FileInputStream files = new FileInputStream(new File(path2));
 		XSSFWorkbook wb = new XSSFWorkbook(files);
 		XSSFSheet sheet = wb.getSheet("testresult");
-		int rownum = sheet.getLastRowNum();
+		int rownum = sheet.getLastRowNum() + 2;
 		
 		XSSFRow row;
 		XSSFCell cell;
@@ -157,26 +178,28 @@ public class Excelutils {
 			rownum++;
 		}
 
-		FileOutputStream fos = new FileOutputStream(path);
+		FileOutputStream fos = new FileOutputStream(path2);
 		wb.write(fos);
 		System.out.println("Writing to excel sheet");
 		fos.close();		
+		wb.close();
 	}
 	
 	public static void writeExcelStudyChairData(String[][] info, String filename, String browser) throws Exception {
 
+		String path3=null;
 		System.out.println("Into write excel Data");
 		if(browser.equalsIgnoreCase("Chrome")) {
-			path = Chrome_result;
+			path3 = Chrome_result;
 		}
 		else if(browser.equalsIgnoreCase("Firefox") || browser.equalsIgnoreCase("Mozilla")) {
-			path = Firefox_result;
+			path3 = Firefox_result;
 		}
 
-		FileInputStream files = new FileInputStream(new File(path));
+		FileInputStream files = new FileInputStream(new File(path3));
 		XSSFWorkbook wb = new XSSFWorkbook(files);
 		XSSFSheet sheet = wb.getSheet("testresult");
-		int rownum = sheet.getLastRowNum();
+		int rownum = sheet.getLastRowNum() + 2;
 		
 		XSSFRow row;
 		XSSFCell cell;
@@ -189,7 +212,7 @@ public class Excelutils {
 			rownum++;
 		}
 
-		FileOutputStream fos = new FileOutputStream(path);
+		FileOutputStream fos = new FileOutputStream(path3);
 		wb.write(fos);
 		System.out.println("Writing to excel sheet");
 		fos.close();	

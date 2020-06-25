@@ -5,17 +5,39 @@
   <test thread-count="5" name="Test-Chrome(failed)">
     <parameter name="Browser" value="chrome"/>
     <classes>
-      <class name="ts_01.Bookshelf_search_without_Storagetype">
+      <class name="ts_02.Collections_with_invalid_main_menu">
         <methods>
-          <include name="afterMethod"/>
+          <include name="reportSetUp"/>
+          <include name="getResult"/>
+          <include name="invalid_main_menu"/>
           <include name="setUp"/>
+          <include name="afterMethod"/>
+          <include name="flushReport"/>
+          <include name="closeBrowser"/>
+        </methods>
+      </class> <!-- ts_02.Collections_with_invalid_main_menu -->
+      <class name="ts_02.Collections_with_invalid_sub_menu">
+        <methods>
           <include name="closeBrowser"/>
           <include name="reportSetUp"/>
           <include name="getResult"/>
-          <include name="bookshelf_search_without_Storagetype"/>
+          <include name="valid_main_menu_and_invalid_submenu"/>
+          <include name="setUp"/>
+          <include name="afterMethod"/>
           <include name="flushReport"/>
         </methods>
-      </class> <!-- ts_01.Bookshelf_search_without_Storagetype -->
+      </class> <!-- ts_02.Collections_with_invalid_sub_menu -->
+      <class name="ts_02.Collections_with_Being_at_Home">
+        <methods>
+          <include name="setUp"/>
+          <include name="reportSetUp"/>
+          <include name="afterMethod"/>
+          <include name="getResult"/>
+          <include name="valid_main_and_submenu"/>
+          <include name="closeBrowser"/>
+          <include name="flushReport"/>
+        </methods>
+      </class> <!-- ts_02.Collections_with_Being_at_Home -->
     </classes>
   </test> <!-- Test-Chrome(failed) -->
 </suite> <!-- Failed suite [Suite] -->

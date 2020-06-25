@@ -38,63 +38,7 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
-					<execution>
-						<phase>pre-integration-test</phase>
-						<!-- your Selenium tests should run in integration phase -->
-						<configuration>
-							<target>
 
-								<java classname="org.openqa.grid.selenium.GridLauncher"
-									classpathref="maven.test.classpath" failonerror="true"
-									fork="false">
-									<arg line="-role hub -port 4445" />
-								</java>
-
-								<java classname="org.openqa.grid.selenium.GridLauncher"
-									classpathref="maven.test.classpath" failonerror="true"
-									fork="false">
-									<arg
-										line="-role node
-										-browser 'browserName=firefox,version=19.0,maxInstances=3'
-								 		-browser 'browserName=internet explorer 64bits,version=9.0,maxInstances=2'
-					                    -hub http://localhost:4445/grid/register
-                               			-port 6665
-                               			-timeout 40000" />
-								</java>
-
-								<java classname="org.openqa.grid.selenium.GridLauncher"
-									classpathref="maven.test.classpath" failonerror="true"
-									fork="false">
-									<arg
-										line="-Dwebdriver.chrome.driver='D:\dharshini\cts\Drivers\driver\chromedriver.exe'
-										-Dwebdriver.gecko.driver='D:\dharshini\cts\Drivers\driver\geckodriver.exe'
-										-Dwebdriver.ie.driver='D:\dharshini\cts\Drivers\driver\IEDriverServer.exe'
-										-Dwebdriver.opera.driver='D:\dharshini\cts\Drivers\driver\operadriver.exe'
-										-role webdriver
-										-hub http://192.168.1.4:4445/grid/register/
-										-port 6666
-										-browser 'browserName=chrome,maxInstances=5'
-										-browser 'browserName=firefox,maxInstances=5'
-										-browser 'browserName=iexplore,maxInstances=5'
-										-browser 'browserName=edge,maxInstances=5'
-										-browser browserName=opera,maxInstances=5'" />
-								</java>
-
-							</target>
-						</configuration>
-
-						<goals>
-							<goal>run</goal>
-						</goals>
-
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
 

@@ -29,7 +29,7 @@ public class Bookshelf{
 	@FindBy(xpath = "//div[contains(text(),'Storage Type')]")
 	WebElement storage_dropdown;
 
-	@FindBy(xpath = "//li[3]//div[2]//div[1]//div[1]//div[1]//ul[1]//li[1]")
+	@FindBy(xpath = "//input[@id='filters_storage_type_Open']")
 	WebElement storage;
 
 	String pn_1 = "/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[3]/ul[1]/li[";
@@ -76,14 +76,7 @@ public class Bookshelf{
 		
 		type = input_data.get(type);
 
-		if(type.equalsIgnoreCase("open"))
-			storage.click();
-
-		else
-		{
-			System.out.println("You have tried to select " + type);
-			System.out.println("But, as per your project instruction you have to select open type bookshelf only");
-		}
+		System.out.println(type);
 
 	}
 
@@ -135,16 +128,11 @@ public class Bookshelf{
 				//Assert.assertTrue((Integer.valueOf(productprice_web)) < 30000);   
 			}	
 
-			String filename = "testresult_" + browser +".xlsx";
+			
 			
 			//writes the results to an excel sheet respective to the browser
-			Excelutils.writeExcelData(result,filename,counter);
-				
-				counter++;
-			
-
-			//waits for 30 seconds
-			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			Excelutils.writeExcelData(result,browser);
+		
 
 		}
 
@@ -154,6 +142,6 @@ public class Bookshelf{
 			System.out.println("But, as per your project instruction you have to search for bookshelf less than or equal to Rs.15000");
 		}
 		
-		driver.navigate().to("www.urbanladder.com");
+		
 	}
 }

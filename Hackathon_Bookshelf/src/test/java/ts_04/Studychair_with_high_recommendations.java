@@ -20,6 +20,7 @@ import pageobjects.Url_navigating_homepage;
 import setup.Environment_Setup;
 import utils.Excelutils;
 import utils.Report;
+import utils.Screenshots;
 
 public class Studychair_with_high_recommendations extends utils.ExtentReport {
 
@@ -57,6 +58,8 @@ public class Studychair_with_high_recommendations extends utils.ExtentReport {
 		
 		log.pass(MarkupHelper.createLabel("Study chair with high recommendation was searched successfully", ExtentColor.GREEN));
 		
+		Url_navigating_homepage.clearpage();
+		
 		System.out.println("Search Data");
 		
 		homepage.searchText("Search for study chair");
@@ -66,6 +69,8 @@ public class Studychair_with_high_recommendations extends utils.ExtentReport {
 		StudyChair sc = PageFactory.initElements(driver, StudyChair.class);
 
 		sc.getresult(browsertype, "Sort By");
+		
+		Screenshots.takesnap(driver, "StudyChair",browsertype);
 		
 		report.display(log, "Study chair with high recommendation was selected");
 		
@@ -81,14 +86,14 @@ public class Studychair_with_high_recommendations extends utils.ExtentReport {
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Study chair with high recommendation Test: SUCCESS");
+			excel.reportToExcel("Study chair with high recommendation Test: SUCCESS",browsertype);
 		else
-			excel.reportToExcel("Study chair with high recommendation Test: FAILURE");
+			excel.reportToExcel("Study chair with high recommendation Test: FAILURE",browsertype);
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Study chair with high recommendation Test: ENDED");
+		excel.reportToExcel("Study chair with high recommendation Test: ENDED",browsertype);
 		// close the driver
 
 		driver.quit();

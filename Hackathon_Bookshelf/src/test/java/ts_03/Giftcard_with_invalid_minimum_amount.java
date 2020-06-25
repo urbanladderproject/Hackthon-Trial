@@ -19,6 +19,7 @@ import pageobjects.GiftCard;
 import setup.Environment_Setup;
 import utils.Excelutils;
 import utils.Report;
+import utils.Screenshots;
 
 public class Giftcard_with_invalid_minimum_amount extends utils.ExtentReport {
 
@@ -59,6 +60,8 @@ public class Giftcard_with_invalid_minimum_amount extends utils.ExtentReport {
 
 		gc.enter_amount("Invalid minimum Gift Card amount");
 		
+		Screenshots.takesnap(driver, "Invalid minimum Gift Card amount",browsertype);
+		
 		report.display(log, "Invalid minimum Gift Card amount didn't perform further operations");
 
 		log.pass(MarkupHelper.createLabel("Invalid minimum Gift Card amount wasn't accepted", ExtentColor.GREEN));
@@ -74,14 +77,14 @@ public class Giftcard_with_invalid_minimum_amount extends utils.ExtentReport {
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Invalid minimum Gift Card amount Test: SUCCESS");
+			excel.reportToExcel("Invalid minimum Gift Card amount Test: SUCCESS",browsertype);
 		else
-			excel.reportToExcel("Invalid minimum Gift Card amount Test: FAILURE");
+			excel.reportToExcel("Invalid minimum Gift Card amount Test: FAILURE",browsertype);
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Invalid minimum Gift Card amount Test: ENDED");
+		excel.reportToExcel("Invalid minimum Gift Card amount Test: ENDED",browsertype);
 		// close the driver
 
 		driver.quit();

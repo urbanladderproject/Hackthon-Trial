@@ -1,9 +1,13 @@
 package ts_03;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -17,9 +21,11 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 
 import pageobjects.GiftCard;
+import pageobjects.Url_navigating_homepage;
 import setup.Environment_Setup;
 import utils.Excelutils;
 import utils.Report;
+import utils.Screenshots;
 
 public class Giftcard_with_invalid_sender_email extends utils.ExtentReport {
 
@@ -47,13 +53,19 @@ public class Giftcard_with_invalid_sender_email extends utils.ExtentReport {
 		report.startBrowser(log);
 
 		log.pass(MarkupHelper.createLabel("Browser started successfully", ExtentColor.GREEN));
+		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+		Url_navigating_homepage.clearpage();
+		
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
 		GiftCard gc  = PageFactory.initElements(driver, GiftCard.class);
 
 		report.select(log, "Invalid sender email");
 
 		log.pass(MarkupHelper.createLabel("Invalid sender email wasn't accepted", ExtentColor.GREEN));
-
+		
 		gc.enter_to_giftcard("Order type");
 
 		gc.select_gifttype("Occasion");
@@ -68,15 +80,19 @@ public class Giftcard_with_invalid_sender_email extends utils.ExtentReport {
 
 		gc.sender_name("Sender Name");
 
-		gc.sender_email("Invalid Sender Email");
+		
 
 		gc.sender_phone("Sender Phonenumber");
 
+		
+		
+		gc.sender_email("Invalid Sender Email");
+		
 		gc.confirm();
 		
-		String warning = gc.Alerts();
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
-		Assert.assertTrue(warning.contains("email address"));
+		Screenshots.takesnap(driver, "invalid sender email",browsertype);
 
 		report.display(log, "Invalid sender email wasn't accepted");
 
@@ -93,14 +109,14 @@ public class Giftcard_with_invalid_sender_email extends utils.ExtentReport {
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Invalid sender email accepting Test: SUCCESS");
+			excel.reportToExcel("Invalid sender email accepting Test: SUCCESS",browsertype);
 		else
-			excel.reportToExcel("Invalid sender email accepting Test: FAILURE");
+			excel.reportToExcel("Invalid sender email accepting Test: FAILURE",browsertype);
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Invalid recepient email accepting Test: ENDED");
+		excel.reportToExcel("Invalid recepient email accepting Test: ENDED",browsertype);
 		// close the driver
 
 		driver.quit();

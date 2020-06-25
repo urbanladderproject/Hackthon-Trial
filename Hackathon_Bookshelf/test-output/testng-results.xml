@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" ignored="0" total="1" passed="0">
+<testng-results skipped="0" failed="3" ignored="4" total="7" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="20725" started-at="2020-06-24T11:09:58Z" finished-at="2020-06-24T11:10:18Z">
+  <suite name="Suite" duration-ms="31899" started-at="2020-06-24T17:57:37Z" finished-at="2020-06-24T17:58:08Z">
     <groups>
     </groups>
-    <test name="Test-Chrome" duration-ms="20725" started-at="2020-06-24T11:09:58Z" finished-at="2020-06-24T11:10:18Z">
-      <class name="ts_01.Bookshelf_search_without_Storagetype">
-        <test-method status="PASS" signature="reportSetUp()[pri:0, instance:ts_01.Bookshelf_search_without_Storagetype@6d7b4f4c]" name="reportSetUp" is-config="true" duration-ms="276" started-at="2020-06-24T11:09:57Z" finished-at="2020-06-24T11:09:58Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- reportSetUp -->
-        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:ts_01.Bookshelf_search_without_Storagetype@6d7b4f4c]" name="setUp" is-config="true" duration-ms="20553" started-at="2020-06-24T11:09:58Z" finished-at="2020-06-24T11:10:18Z">
+    <test name="Test-Chrome" duration-ms="31899" started-at="2020-06-24T17:57:37Z" finished-at="2020-06-24T17:58:08Z">
+      <class name="ts_02.Collections_with_invalid_sub_menu">
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:ts_02.Collections_with_invalid_sub_menu@13a5fe33]" name="setUp" is-config="true" duration-ms="7772" started-at="2020-06-24T17:58:00Z" finished-at="2020-06-24T17:58:08Z">
           <params>
             <param index="0">
               <value>
@@ -27,22 +23,16 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="FAIL" signature="bookshelf_search_without_Storagetype()[pri:0, instance:ts_01.Bookshelf_search_without_Storagetype@6d7b4f4c]" name="bookshelf_search_without_Storagetype" duration-ms="128" started-at="2020-06-24T11:10:18Z" finished-at="2020-06-24T11:10:18Z">
-          <exception class="java.lang.NoSuchMethodError">
+        <test-method status="FAIL" signature="valid_main_menu_and_invalid_submenu()[pri:0, instance:ts_02.Collections_with_invalid_sub_menu@13a5fe33]" name="valid_main_menu_and_invalid_submenu" duration-ms="45" started-at="2020-06-24T17:58:08Z" finished-at="2020-06-24T17:58:08Z">
+          <exception class="java.lang.RuntimeException">
             <message>
-              <![CDATA[org.apache.poi.util.POILogger.log(ILjava/lang/Object;Ljava/lang/Throwable;)V]]>
+              <![CDATA[java.lang.reflect.InvocationTargetException]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.NoSuchMethodError: org.apache.poi.util.POILogger.log(ILjava/lang/Object;Ljava/lang/Throwable;)V
-at org.apache.poi.openxml4j.opc.ZipPackage.buildPartName(ZipPackage.java:250)
-at org.apache.poi.openxml4j.opc.ZipPackage.getPartsImpl(ZipPackage.java:189)
-at org.apache.poi.openxml4j.opc.OPCPackage.getParts(OPCPackage.java:662)
-at org.apache.poi.openxml4j.opc.OPCPackage.open(OPCPackage.java:269)
-at org.apache.poi.util.PackageHelper.open(PackageHelper.java:39)
-at org.apache.poi.xssf.usermodel.XSSFWorkbook.<init>(XSSFWorkbook.java:204)
-at utils.Excelutils.readExcelData(Excelutils.java:46)
-at pageobjects.Url_navigating_homepage.<init>(Url_navigating_homepage.java:29)
-at ts_01.Bookshelf_search_without_Storagetype.bookshelf_search_without_Storagetype(Bookshelf_search_without_Storagetype.java:62)
+              <![CDATA[java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+at org.openqa.selenium.support.PageFactory.instantiatePage(PageFactory.java:138)
+at org.openqa.selenium.support.PageFactory.initElements(PageFactory.java:64)
+at ts_02.Collections_with_invalid_sub_menu.valid_main_menu_and_invalid_submenu(Collections_with_invalid_sub_menu.java:64)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -68,34 +58,83 @@ at org.testng.TestNG.run(TestNG.java:1017)
 at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: java.lang.reflect.InvocationTargetException
+at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+at org.openqa.selenium.support.PageFactory.instantiatePage(PageFactory.java:129)
+... 27 more
+Caused by: java.lang.NullPointerException
+at utils.Excelutils.readExcelData(Excelutils.java:57)
+at pageobjects.Display_Collections.<init>(Display_Collections.java:32)
+... 32 more
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.NoSuchMethodError -->
+          </exception> <!-- java.lang.RuntimeException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- bookshelf_search_without_Storagetype -->
-        <test-method status="FAIL" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:ts_01.Bookshelf_search_without_Storagetype@6d7b4f4c]" name="afterMethod" is-config="true" duration-ms="0" started-at="2020-06-24T11:10:18Z" finished-at="2020-06-24T11:10:18Z">
+        </test-method> <!-- valid_main_menu_and_invalid_submenu -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:ts_02.Collections_with_invalid_sub_menu@13a5fe33]" name="afterMethod" is-config="true" duration-ms="64" started-at="2020-06-24T17:58:08Z" finished-at="2020-06-24T17:58:08Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=bookshelf_search_without_Storagetype status=FAILURE method=Bookshelf_search_without_Storagetype.bookshelf_search_without_Storagetype()[pri:0, instance:ts_01.Bookshelf_search_without_Storagetype@6d7b4f4c] output={null}]]]>
+                <![CDATA[[TestResult name=valid_main_menu_and_invalid_submenu status=FAILURE method=Collections_with_invalid_sub_menu.valid_main_menu_and_invalid_submenu()[pri:0, instance:ts_02.Collections_with_invalid_sub_menu@13a5fe33] output={null}]]]>
               </value>
             </param>
           </params>
-          <exception class="java.lang.NullPointerException">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:ts_02.Collections_with_invalid_sub_menu@13a5fe33]" name="getResult" is-config="true" duration-ms="4" started-at="2020-06-24T17:58:08Z" finished-at="2020-06-24T17:58:08Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=valid_main_menu_and_invalid_submenu status=FAILURE method=Collections_with_invalid_sub_menu.valid_main_menu_and_invalid_submenu()[pri:0, instance:ts_02.Collections_with_invalid_sub_menu@13a5fe33] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="closeBrowser()[pri:0, instance:ts_02.Collections_with_invalid_sub_menu@13a5fe33]" name="closeBrowser" is-config="true" duration-ms="777" started-at="2020-06-24T17:58:08Z" finished-at="2020-06-24T17:58:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+      </class> <!-- ts_02.Collections_with_invalid_sub_menu -->
+      <class name="ts_02.Collections_with_invalid_main_menu">
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:ts_02.Collections_with_invalid_main_menu@527740a2]" name="setUp" is-config="true" duration-ms="9571" started-at="2020-06-24T17:57:49Z" finished-at="2020-06-24T17:57:58Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[local]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="FAIL" signature="invalid_main_menu()[pri:0, instance:ts_02.Collections_with_invalid_main_menu@527740a2]" name="invalid_main_menu" duration-ms="56" started-at="2020-06-24T17:57:58Z" finished-at="2020-06-24T17:57:58Z">
+          <exception class="java.lang.RuntimeException">
+            <message>
+              <![CDATA[java.lang.reflect.InvocationTargetException]]>
+            </message>
             <full-stacktrace>
-              <![CDATA[java.lang.NullPointerException
-at utils.Excelutils.reportToExcel(Excelutils.java:116)
-at ts_01.Bookshelf_search_without_Storagetype.afterMethod(Bookshelf_search_without_Storagetype.java:110)
+              <![CDATA[java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+at org.openqa.selenium.support.PageFactory.instantiatePage(PageFactory.java:138)
+at org.openqa.selenium.support.PageFactory.initElements(PageFactory.java:64)
+at ts_02.Collections_with_invalid_main_menu.invalid_main_menu(Collections_with_invalid_main_menu.java:64)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 at java.lang.reflect.Method.invoke(Method.java:498)
 at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
-at org.testng.internal.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:59)
-at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:458)
-at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:222)
-at org.testng.internal.Invoker.invokeMethod(Invoker.java:646)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
 at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
 at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
 at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
@@ -115,25 +154,154 @@ at org.testng.TestNG.run(TestNG.java:1017)
 at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: java.lang.reflect.InvocationTargetException
+at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+at org.openqa.selenium.support.PageFactory.instantiatePage(PageFactory.java:129)
+... 27 more
+Caused by: java.lang.NullPointerException
+at utils.Excelutils.readExcelData(Excelutils.java:57)
+at pageobjects.Display_Collections.<init>(Display_Collections.java:32)
+... 32 more
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.NullPointerException -->
+          </exception> <!-- java.lang.RuntimeException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- invalid_main_menu -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:ts_02.Collections_with_invalid_main_menu@527740a2]" name="afterMethod" is-config="true" duration-ms="104" started-at="2020-06-24T17:57:58Z" finished-at="2020-06-24T17:57:58Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=invalid_main_menu status=FAILURE method=Collections_with_invalid_main_menu.invalid_main_menu()[pri:0, instance:ts_02.Collections_with_invalid_main_menu@527740a2] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterMethod -->
-        <test-method status="SKIP" signature="closeBrowser()[pri:0, instance:ts_01.Bookshelf_search_without_Storagetype@6d7b4f4c]" name="closeBrowser" is-config="true" duration-ms="0" started-at="2020-06-24T11:10:18Z" finished-at="2020-06-24T11:10:18Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- closeBrowser -->
-        <test-method status="SKIP" signature="getResult(org.testng.ITestResult)[pri:0, instance:ts_01.Bookshelf_search_without_Storagetype@6d7b4f4c]" name="getResult" is-config="true" duration-ms="0" started-at="2020-06-24T11:10:18Z" finished-at="2020-06-24T11:10:18Z">
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:ts_02.Collections_with_invalid_main_menu@527740a2]" name="getResult" is-config="true" duration-ms="8" started-at="2020-06-24T17:57:58Z" finished-at="2020-06-24T17:57:58Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=invalid_main_menu status=FAILURE method=Collections_with_invalid_main_menu.invalid_main_menu()[pri:0, instance:ts_02.Collections_with_invalid_main_menu@527740a2] output={null}]]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getResult -->
-        <test-method status="PASS" signature="flushReport()[pri:0, instance:ts_01.Bookshelf_search_without_Storagetype@6d7b4f4c]" name="flushReport" is-config="true" duration-ms="565" started-at="2020-06-24T11:10:18Z" finished-at="2020-06-24T11:10:19Z">
+        <test-method status="PASS" signature="closeBrowser()[pri:0, instance:ts_02.Collections_with_invalid_main_menu@527740a2]" name="closeBrowser" is-config="true" duration-ms="1275" started-at="2020-06-24T17:57:58Z" finished-at="2020-06-24T17:58:00Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+      </class> <!-- ts_02.Collections_with_invalid_main_menu -->
+      <class name="ts_02.Collections_with_Being_at_Home">
+        <test-method status="PASS" signature="reportSetUp()[pri:0, instance:ts_02.Collections_with_Being_at_Home@6d7b4f4c]" name="reportSetUp" is-config="true" duration-ms="256" started-at="2020-06-24T17:57:36Z" finished-at="2020-06-24T17:57:37Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- reportSetUp -->
+        <test-method status="PASS" signature="setUp(java.lang.String, java.lang.String)[pri:0, instance:ts_02.Collections_with_Being_at_Home@6d7b4f4c]" name="setUp" is-config="true" duration-ms="10234" started-at="2020-06-24T17:57:37Z" finished-at="2020-06-24T17:57:47Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[local]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="FAIL" signature="valid_main_and_submenu()[pri:0, instance:ts_02.Collections_with_Being_at_Home@6d7b4f4c]" name="valid_main_and_submenu" duration-ms="908" started-at="2020-06-24T17:57:47Z" finished-at="2020-06-24T17:57:48Z">
+          <exception class="java.lang.RuntimeException">
+            <message>
+              <![CDATA[java.lang.reflect.InvocationTargetException]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+at org.openqa.selenium.support.PageFactory.instantiatePage(PageFactory.java:138)
+at org.openqa.selenium.support.PageFactory.initElements(PageFactory.java:64)
+at ts_02.Collections_with_Being_at_Home.valid_main_and_submenu(Collections_with_Being_at_Home.java:64)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:124)
+at org.testng.internal.Invoker.invokeMethod(Invoker.java:583)
+at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:719)
+at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:989)
+at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:125)
+at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:109)
+at org.testng.TestRunner.privateRun(TestRunner.java:648)
+at org.testng.TestRunner.run(TestRunner.java:505)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:455)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:450)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:415)
+at org.testng.SuiteRunner.run(SuiteRunner.java:364)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:84)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1208)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1137)
+at org.testng.TestNG.runSuites(TestNG.java:1049)
+at org.testng.TestNG.run(TestNG.java:1017)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
+Caused by: java.lang.reflect.InvocationTargetException
+at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+at org.openqa.selenium.support.PageFactory.instantiatePage(PageFactory.java:129)
+... 27 more
+Caused by: java.lang.NullPointerException
+at utils.Excelutils.readExcelData(Excelutils.java:57)
+at pageobjects.Display_Collections.<init>(Display_Collections.java:32)
+... 32 more
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.RuntimeException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- valid_main_and_submenu -->
+        <test-method status="PASS" signature="afterMethod(org.testng.ITestResult)[pri:0, instance:ts_02.Collections_with_Being_at_Home@6d7b4f4c]" name="afterMethod" is-config="true" duration-ms="256" started-at="2020-06-24T17:57:48Z" finished-at="2020-06-24T17:57:48Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=valid_main_and_submenu status=FAILURE method=Collections_with_Being_at_Home.valid_main_and_submenu()[pri:0, instance:ts_02.Collections_with_Being_at_Home@6d7b4f4c] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+        <test-method status="PASS" signature="getResult(org.testng.ITestResult)[pri:0, instance:ts_02.Collections_with_Being_at_Home@6d7b4f4c]" name="getResult" is-config="true" duration-ms="8" started-at="2020-06-24T17:57:48Z" finished-at="2020-06-24T17:57:48Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=valid_main_and_submenu status=FAILURE method=Collections_with_Being_at_Home.valid_main_and_submenu()[pri:0, instance:ts_02.Collections_with_Being_at_Home@6d7b4f4c] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getResult -->
+        <test-method status="PASS" signature="closeBrowser()[pri:0, instance:ts_02.Collections_with_Being_at_Home@6d7b4f4c]" name="closeBrowser" is-config="true" duration-ms="789" started-at="2020-06-24T17:57:48Z" finished-at="2020-06-24T17:57:49Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+        <test-method status="PASS" signature="flushReport()[pri:0, instance:ts_02.Collections_with_Being_at_Home@6d7b4f4c]" name="flushReport" is-config="true" duration-ms="432" started-at="2020-06-24T17:58:08Z" finished-at="2020-06-24T17:58:09Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- flushReport -->
-      </class> <!-- ts_01.Bookshelf_search_without_Storagetype -->
+      </class> <!-- ts_02.Collections_with_Being_at_Home -->
     </test> <!-- Test-Chrome -->
   </suite> <!-- Suite -->
 </testng-results>

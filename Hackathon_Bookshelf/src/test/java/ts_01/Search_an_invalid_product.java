@@ -18,6 +18,7 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import pageobjects.Url_navigating_homepage;
 import setup.Environment_Setup;
 import utils.Excelutils;
+import utils.ExtentReport;
 import utils.Report;
 
 public class Search_an_invalid_product extends utils.ExtentReport {
@@ -42,7 +43,7 @@ public class Search_an_invalid_product extends utils.ExtentReport {
 		
 		Report report = new Report();
 		
-		log = reports.createTest("Test an invalid product search");
+		ExtentReport.log = ExtentReport.reports.createTest("Test an invalid product search");
 		
 		report.startBrowser(log);
 		
@@ -72,14 +73,14 @@ public class Search_an_invalid_product extends utils.ExtentReport {
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Products other than bookshelf are not searched Test: SUCCESS");
+			excel.reportToExcel("Products other than bookshelf are not searched Test: SUCCESS",browsertype);
 		else
-			excel.reportToExcel("Products other than bookshelf are not searched Test: FAILURE");
+			excel.reportToExcel("Products other than bookshelf are not searched Test: FAILURE",browsertype);
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Products other than bookshelf are not searched Test: ENDED");
+		excel.reportToExcel("Products other than bookshelf are not searched Test: ENDED",browsertype);
 		// close the driver
 
 		driver.quit();

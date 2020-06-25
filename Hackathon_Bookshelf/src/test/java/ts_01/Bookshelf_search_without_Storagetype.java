@@ -23,6 +23,7 @@ import setup.Environment_Setup;
 import utils.Excelutils;
 import utils.ExtentReport;
 import utils.Report;
+import utils.Screenshots;
 
 public class Bookshelf_search_without_Storagetype extends ExtentReport {
 
@@ -37,9 +38,7 @@ public class Bookshelf_search_without_Storagetype extends ExtentReport {
 	public void setUp(@Optional("chrome") String browser, @Optional("local") String environment) {
 		driver = Environment_Setup.getDriver(browser, environment);
 		browsertype = browser;
-	}
-	
-	
+	}	
 	
 	//search for bookshelf without mentioning the storage type in the search bar
 	@Test	
@@ -63,7 +62,7 @@ public class Bookshelf_search_without_Storagetype extends ExtentReport {
 		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
-		homepage.clearpage();
+		Url_navigating_homepage.clearpage();
 		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
@@ -83,9 +82,11 @@ public class Bookshelf_search_without_Storagetype extends ExtentReport {
 		
 		bookshelf.storage_dropdown();
 		
-		bookshelf.select_storagetype("Storage Type");
+		bookshelf.select_storagetype("Storage type");
 		
 		bookshelf.getresult("Price",browsertype);
+		
+		Screenshots.takesnap(driver, "Search without mentioning the storage type",browsertype);
 		
 		report.display(log, "Bookshelf storage type was selected");
 		
@@ -101,14 +102,14 @@ public class Bookshelf_search_without_Storagetype extends ExtentReport {
 	public void afterMethod(ITestResult result) throws Exception {
 		// System.out.println("after method");
 		if (result.isSuccess())
-			excel.reportToExcel("Bookshelf didnot search for invalid storage Test: SUCCESS");
+			excel.reportToExcel("Bookshelf didnot search for invalid storage Test: SUCCESS",browsertype);
 		else
-			excel.reportToExcel("Bookshelf search without storage type Test: FAILURE");
+			excel.reportToExcel("Bookshelf didnot search for invalid storage type Test: FAILURE",browsertype);
 	}
 
 	@AfterClass
 	public void closeBrowser() throws IOException {
-		excel.reportToExcel("Bookshelf search without storage type Test: ENDED");
+		excel.reportToExcel("Bookshelf didnot search for invalid storage type Test: ENDED",browsertype);
 		// close the driver
 
 		driver.quit();
